@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	
+	<!-- 객체를 생성하기 위한 태그. 자바bean 생성 규약이 존재함. -->
+	<!-- com.exam.core.MyApp 객체(인스턴스)를 생성(new)하여 MyApp이라는 이름으로 스프링에 등록 -->
+	<!-- id속성 뿐만 아니라 name속성 사용해도 된다 (id는 스프링이 고유한지 검사해주고, name은 여러곳에 사용될 수 있음) -->
+	<!-- <bean id="MyApp" class="com.exam.core.MyApp" >
+		해당 객체의 MyService 속성(필드)에 스프링에 MyService라는 이름으로 등록된 객체를 주입(저장)
+		<property name="myService" ref="MyServiceKo"></property>
+		</bean> -->
+	<!-- <bean id="MyServiceEn" class="com.exam.core.MyServiceEn" ></bean> -->
+	<!-- <bean id="MyServiceKo" class="com.exam.core.MyServiceKo" ></bean> -->
+	
+	<!-- 위와 같이 직접적으로 타이핑하여 bean을 생성하는 것이 아니라 자동으로 생성하기 위해 xml의 Namespaces에서 context를 설정함. -->
+	<!-- com.exam.core 패키지 아래에 존재하는 클래스들 중 @Component(특별한 역할 없이 스프링에 등록된 빈),@controller,@Service,@Repository,@named등의 
+		 어노테이션이 적용된 클래스들의 객체를 생성하여 스프링에 등록 -->
+	<context:component-scan base-package="com.exam.core"></context:component-scan>
+	
+	<!-- 끼워넣을 코드를 담고 있는 MyAdvice 객체를 스프링에 등록 -->	
+	<bean id="MyAdvice" class="com.exam.core.MyAdvice"></bean>	
+	
+	<aop:config>
+		<!-- 여러번 사용되는 pointcut 변수로 등록 (pointcut속성이 아니라 pointcut-ref속성으로 사용함) -->
+		<!-- <aop:pointcut expression="execution(* com.exam.core.MyService.*(..))" id="MyServicePoint"/> -->
+		
+		<aop:pointcut expression="execution(* com.exam.core.*.*(..))" id="MyServicePoint"/>
+	
+		<!-- <aop:aspect>태그 : 어떤 코드(Advice)를 어느 지점(point cut)에 끼워넣을 것인지를 설정  -->
+		<!-- <aop:aspect ref="MyAdvice">
+			MyAdvice 객체의 beforeTargetMethod 메서드를 MyService객체의 모든 메서드 실행 전에 끼워 넣어 실행
+			<aop:before method="beforeTargetMethod" pointcut-ref="MyServicePoint"/>
+		</aop:aspect> -->									 <!-- execution(반환형 적용클래스.매소드명(인수)) 형식. 이때 *는 모든 것 의미 -->
+		
+		<!-- <aop:aspect ref="MyAdvice">
+		MyAdvice 객체의 beforeTargetMethod 메서드를 MyService객체의 모든 메서드 실행 전에 끼워 넣어 실행
+			<aop:after method="afterTargetMethod" pointcut="execution(* com.exam.core.MyService.*(..))"/>
+		</aop:aspect> -->
+		
+		<aop:aspect ref="MyAdvice">
+			<aop:around method="aroundTargetMethod" pointcut-ref="MyServicePoint"/>
+		</aop:aspect> 
+	</aop:config>
+		
+</beans>
+<!-- src/main/webapp/WEB-INF/spring/root-context.xml을 복사해서 만든 파일 -->
+<!-- 최근 들어서 순수 xml 파일을 작성하는 것이 번거로워 순수 java로 만드는 추세가 증가하고 있다. -->
