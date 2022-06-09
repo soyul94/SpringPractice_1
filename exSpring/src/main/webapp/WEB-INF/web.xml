@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
+
+<!-- 새로운 버전 설정 -->
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xmlns="http://xmlns.jcp.org/xml/ns/javaee" 
+		xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" 
+		id="WebApp_ID" version="3.1">
+<!-- 기존의 버전 설정 -->
+<!-- <web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee https://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee https://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"> -->
 
 	<!-- The definition of the Root Spring Container shared by all Servlets and Filters -->
 	<context-param>
@@ -10,12 +17,18 @@
 	</context-param>
 	
 	<!-- Creates the Spring Container shared by all Servlets and Filters -->
+	<!-- 웹애플리케이션이 처음 시작될 때, 실행
+		 위의 root-context.xml 설정파일의 내용대로 객체를 생성하여 보관하는 스프링 객체 컨테이너 생성-->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
+	
+	<!-- DispatcherServlet는 ContextLoaderListener을 상속함 -->
 
 	<!-- Processes application requests -->
 	<servlet>
+		<!-- 요청을 받아서 스프링에 등록된 객체들을 사용하여 처리하는 서블릿 -->
+		<!-- servlet-context.xml 설정파일의 내용대로 객체를 생성하여 보관하는 스프링 객체 컨테이너 생성-->
 		<servlet-name>appServlet</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
@@ -27,7 +40,9 @@
 		
 	<servlet-mapping>
 		<servlet-name>appServlet</servlet-name>
-		<url-pattern>/</url-pattern>
+		<!-- 확장자.do로 끝나는 요청에 스프링이 동학하도록 -->
+		<url-pattern>*.do</url-pattern>
+		<!-- <url-pattern>/</url-pattern> : 모든 요청에서 스프링이 동작하도록 한 설정 -->
 	</servlet-mapping>
 
 </web-app>

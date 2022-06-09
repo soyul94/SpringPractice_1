@@ -10,19 +10,43 @@
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 	
 	<!-- Enables the Spring MVC @Controller programming model -->
+	<!-- 어노테이션을 이용하여  Spring 웹 애플리케이션을 구현할 때 필요한 객체들을 자동 등록 -->
 	<annotation-driven />
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
+	<!-- 스프링이 파일을 찾을 수 있도록 -->
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
+	<!-- 핸들러(컨트롤러)가 뷰 이름을 반환한 경우, 뷰 이름의 앞에 "/WEB-INF/views/"를 붙이고, 뒤에 ".jsp를 붙여서 그 경로의 파일로 이동(forward)하도록 설정" -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
+	
+	<!-- com.exam.exspring패키지 아래에서 @Component,@Controller,@Service,@Repository 등의 어노테이션이 
+		 적용된 클래스들의 객체를 생성하여 스프링(객체컨테이너)에 자동 등록 -->
 	<context:component-scan base-package="com.exam.exSpring" />
 	
 	
+	<!-- 데이터베이스 연결을 관리하는 커넥션풀로서 DBCP를 등록 -->
+	<!-- DB연결을 위한 정보 입력 -->
+	<beans:bean id="BasicDataSource" class="org.apache.commons.dbcp2.BasicDataSource">
+		<beans:property name="driverClassName" value=""/>
+		<beans:property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"></beans:property>
+		<beans:property name="username" value="web"></beans:property>
+		<beans:property name="password" value="web1234"></beans:property>
+	</beans:bean>
+	
+	<!-- MyBatis본체를 등록 (커넥션을 제공하는 객체(DBCP)와 설정파일 위치(.xml)를 설정)-->	
+	<beans:bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+  		<!-- 데이터베이스 연결을 위한 커넥션풀 정보 -->
+  		<beans:property name="dataSource" ref="BasicDataSource" />
+  		<!-- 설정파일 위치 -->
+  		<beans:property name="configLocation" value="classpath:mybatis/mybatis-config.xml" />
+	</beans:bean>
+	<!--classpath:== /exSpring/src/main/resources-->
+	<!-- Namespaces에서 설정이 되어있지 않아서 bean태그를 그대로 사용하면 오류발생 -> beans:bean태그 사용 -->
 	
 </beans:beans>

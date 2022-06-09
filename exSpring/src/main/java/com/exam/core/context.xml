@@ -22,32 +22,35 @@
 	<!-- 위와 같이 직접적으로 타이핑하여 bean을 생성하는 것이 아니라 자동으로 생성하기 위해 xml의 Namespaces에서 context를 설정함. -->
 	<!-- com.exam.core 패키지 아래에 존재하는 클래스들 중 @Component(특별한 역할 없이 스프링에 등록된 빈),@controller,@Service,@Repository,@named등의 
 		 어노테이션이 적용된 클래스들의 객체를 생성하여 스프링에 등록 -->
-	<context:component-scan base-package="com.exam.core"></context:component-scan>
+<context:component-scan base-package="com.exam.core"></context:component-scan>
 	
-	<!-- 끼워넣을 코드를 담고 있는 MyAdvice 객체를 스프링에 등록 -->	
-	<bean id="MyAdvice" class="com.exam.core.MyAdvice"></bean>	
-	
-	<aop:config>
-		<!-- 여러번 사용되는 pointcut 변수로 등록 (pointcut속성이 아니라 pointcut-ref속성으로 사용함) -->
-		<!-- <aop:pointcut expression="execution(* com.exam.core.MyService.*(..))" id="MyServicePoint"/> -->
+<!-- 끼워넣을 코드를 담고 있는 MyAdvice 객체를 스프링에 등록 -->	
+<!-- <bean id="MyAdvice" class="com.exam.core.MyAdvice"></bean>	 -->
+
+<!-- 	<aop:config>
+		여러번 사용되는 pointcut 변수로 등록 (pointcut속성이 아니라 pointcut-ref속성으로 사용함)
+		<aop:pointcut expression="execution(* com.exam.core.MyService.*(..))" id="MyServicePoint"/>
 		
 		<aop:pointcut expression="execution(* com.exam.core.*.*(..))" id="MyServicePoint"/>
 	
-		<!-- <aop:aspect>태그 : 어떤 코드(Advice)를 어느 지점(point cut)에 끼워넣을 것인지를 설정  -->
-		<!-- <aop:aspect ref="MyAdvice">
+		<aop:aspect>태그 : 어떤 코드(Advice)를 어느 지점(point cut)에 끼워넣을 것인지를 설정 
+		<aop:aspect ref="MyAdvice">
 			MyAdvice 객체의 beforeTargetMethod 메서드를 MyService객체의 모든 메서드 실행 전에 끼워 넣어 실행
 			<aop:before method="beforeTargetMethod" pointcut-ref="MyServicePoint"/>
-		</aop:aspect> -->									 <!-- execution(반환형 적용클래스.매소드명(인수)) 형식. 이때 *는 모든 것 의미 -->
+		</aop:aspect>									 execution(반환형 적용클래스.매소드명(인수)) 형식. 이때 *는 모든 것 의미
 		
-		<!-- <aop:aspect ref="MyAdvice">
+		<aop:aspect ref="MyAdvice">
 		MyAdvice 객체의 beforeTargetMethod 메서드를 MyService객체의 모든 메서드 실행 전에 끼워 넣어 실행
 			<aop:after method="afterTargetMethod" pointcut="execution(* com.exam.core.MyService.*(..))"/>
-		</aop:aspect> -->
+		</aop:aspect>
 		
 		<aop:aspect ref="MyAdvice">
 			<aop:around method="aroundTargetMethod" pointcut-ref="MyServicePoint"/>
 		</aop:aspect> 
-	</aop:config>
+	</aop:config> -->
+	
+	<!-- @Aspect와 같은 애노테이션을 사용하여 AOP 설정 -->
+	<aop:aspectj-autoproxy />
 		
 </beans>
 <!-- src/main/webapp/WEB-INF/spring/root-context.xml을 복사해서 만든 파일 -->

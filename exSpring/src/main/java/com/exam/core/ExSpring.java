@@ -26,10 +26,11 @@ public class ExSpring {
 		MyApp myApp= (MyApp)context.getBean("MyApp"); //스프링컨테이너의 프로퍼티에 MyApp라는 이름으로 등록된 객체를 가져오기 
 		myApp.say();
 		
-		//스프링에 등록되어 있는 객체들이 목록
-		for (String beanName : context.getBeanDefinitionNames()) {
-			System.out.println(beanName+" : "+ context.getBean(beanName).getClass().getName());
-		}
+		
+//		//스프링에 등록되어 있는 객체들이 목록
+//		for (String beanName : context.getBeanDefinitionNames()) {
+//			System.out.println(beanName+" : "+ context.getBean(beanName).getClass().getName());
+//		}
 		
 	}
 }
