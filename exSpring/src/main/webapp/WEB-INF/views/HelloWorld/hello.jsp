@@ -13,7 +13,7 @@
 <p><c:out value="핸들러로 받은 객체를 이용한 계산결과 : ${myValue.x} + ${myValue.y} = ${myValue.sum}" /></p>
 <p><c:out value="Model.Attribute()를 이용한 계산결과 : ${modelMyValue.x} + ${modelMyValue.y} = ${modelMyValue.sum}" /></p>
 <br>
-<p><c:out value="현재 서버 시간 : "/><fmt:formatDate value="${time}" pattern="yyyy년 MM월 dd일 HH시 mm분" /> </p>
+<p><c:out value="현재 서버 시간 : "/><fmt:formatDate value="${time}" pattern="yyyy년 M월 d일 H시 m분" /> </p>
 
 </body>
 </html>

@@ -19,14 +19,14 @@ public class HelloController {
 	@RequestMapping(value = "hello.do" ,method = RequestMethod.GET)
 	public String plusCalculator(MyValue value, Model model) {
 		
-		Date date = new Date();
+		//Date date = new Date();
 
 		int x=value.getX();
 		int y=value.getY();
 		
 		value.setSum(x+y);			
 		
-		model.addAttribute("time",date);
+		model.addAttribute("time",new Date());
 		model.addAttribute("modelMyValue",value);
 		
 		return "/HelloWorld/hello";

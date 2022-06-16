@@ -10,9 +10,9 @@
 		</layout>
 	</appender>
 	
-	<!-- Application Loggers -->
+	<!-- Application Loggers --> <!-- 해당 패키지에 대한 로그를 lavel value에 지정한 레벨 이상의 로그만 출력 -->
 	<logger name="com.exam.exSpring">
-		<level value="info" />
+		<level value="debug" />
 	</logger>
 	
 	<!-- 3rdparty Loggers -->
@@ -39,3 +39,7 @@
 	</root>
 	
 </log4j:configuration>
+
+<!-- 로깅레벨 : (낮음) TRACE - DEBUG - IMFO - WARN - ERROR - FATAL (높음) 
+				mybaits의 에러들은 trace와 debug 레벨이다.
+-->

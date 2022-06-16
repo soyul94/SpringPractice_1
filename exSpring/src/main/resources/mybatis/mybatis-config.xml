@@ -12,21 +12,22 @@
 	
 	<!-- 마이바티스 설정파일에서 사용하기 쉽게 미리 alias하는 것 -->
 	<typeAliases>
-		<typeAlias alias="MemberVO" type="com.exam.member.MemberVO"/>
+		<typeAlias alias="MemberVO" type="com.exam.exSpring.member.MemberVO"/>
 		<!-- <typeAlias alias="StudentVO" type="com.exam.student.StudentVO"/> -->
 	</typeAliases>
-	
-	<environments default="development">
+
+<!-- 스프링 설정파일에 이미 저장된 데이터므로 상관없음 -->	
+<!-- 	<environments default="development">
 		<environment id="development">
 	      <transactionManager type="JDBC"/>
-	      <dataSource type="POOLED"> <!-- DB의 접속 정보. 미리 로그인 해두고 원하는 DB를 제공함. -->
+	      <dataSource type="POOLED"> DB의 접속 정보. 미리 로그인 해두고 원하는 DB를 제공함.
 	        <property name="driver" value="oracle.jdbc.OracleDriver"/>
 	        <property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
 	        <property name="username" value="web"/>
 	        <property name="password" value="web1234"/>
 	      </dataSource>
 	    </environment>
-	</environments>
+	</environments> -->
   
   <mappers> <!-- 마이바티스를 통해서 실행할 SQL문들을 정의해놓은 XML파일들 -->
     <mapper resource="mybatis/MemberMapper.xml"/>

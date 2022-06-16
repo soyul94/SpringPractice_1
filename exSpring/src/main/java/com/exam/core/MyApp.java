@@ -11,8 +11,8 @@ public class MyApp {
 	
 	//스프링에 등록된 객체들 중에서 이 변수 타입에 맞는 객체를 주입(저장)
 	@Autowired//스프링에 등록된 객체들 중 자동으로 등록하라는 어노테이션 @Inject(비교적 최근버전)와 동일, //@Resource(구버전) : @Resource로 지정된 이름을 가져옴.
-	//타입이 맞는 객체가 여러개 있는 경우, 그 중 이름이 일지하는 객체를 주입
-	@Named("MyServiceKo")//자동으로 등록할 객체의 이름 //@Qualifier 어노테이션으로도 가능함(단, @Qualifier로 선언된 클래스만 가능.)
+	//타입이 맞는 객체가 여러개 있는 경우, 그 중 이름이 일지하는 객체를 주입  //+@Resource("이름") : 이름기준으로 불러서 매칭
+	@Named("MyServiceKo")//자동으로 등록할 객체의 이름 //@Qualifier 어노테이션으로도 가능함(단, @Qualifier로 선언된 클래스만 가능.) 
 	private MyService myService;
 		
 	public MyService getMyService() {

@@ -6,11 +6,11 @@
   <!-- namespace는 현재 파일에 정의된 SQL문 집합의 고유한 이름 
   	   보통은 SQL문을 실행할 Dao인터페이스 이름으로 설정-->
   <!-- 문성진 교수님의 *_SQL.xml파일 역할 -->
-<mapper namespace="com.exam.member.MemberDao">
+<mapper namespace="com.exam.exSpring.member.MemberDao">
 <!-- SQL문의 종류와 동일한 이름의 태그를 사용하여 SQL문을 등록
 	 id는 현재 파일 내에서 SQL문의 고유한 이름으로 보통은 SQL문을 실행할 Dao인터페이스의 메서드 이름으로 설정 -->
 	
-	<resultMap type="com.exam.member.MemberVO" id="memberVo">
+	<resultMap type="com.exam.exSpring.member.MemberVO" id="memberVo">
 		<id	property="memId" column="MEM_ID" />		<!-- PK컬럼은 id로 선언한다. -->
 		<result property="memPW" column="MEM_PW" />
 		<result property="memName" column="MEM_NAME" />
@@ -31,19 +31,19 @@
     	select MEM_ID as memId, MEM_PW as memPw, MEM_NAME as memName, MEM_POINT as memPoint from member_table
 	</select> -->
 	
-	<select id="selectLoginMember" resultType="MemberVO" parameterType="com.exam.member.MemberVO">
+	<select id="selectLoginMember" resultType="MemberVO" parameterType="com.exam.exSpring.member.MemberVO">
 		select MEM_ID, MEM_NAME, MEM_POINT from member_table where MEM_ID=#{memId} and MEM_PW=#{memPW}
 	</select>
 	<!-- parameterType을 명시하지 않아도 에러는 발생하지 않으나 권장사항이다. -->
 	
-	<insert id="insertMember" parameterType="com.exam.member.MemberVO" >
+	<insert id="insertMember" parameterType="com.exam.exSpring.member.MemberVO" >
 		INSERT INTO MEMBER_TABLE(MEM_ID, MEM_PW, MEM_NAME, MEM_POINT) VALUES(#{memId}, #{memPW}, #{memName}, #{memPoint})
 	</insert>
 	<!-- prameterType은 쿼리문을 수행하기 위해 받을 인자의 형태를 지정하는 속성 -->
 	<!-- #{}대신 ${}을 써도 쿼리문은 수행되나 보안상으로 좋지 않기 때문에 쓰지 않는다. 
 		 ${}는 그냥 값이 들어가는게 아니라 문자열을 +연산하는 형태로 들어가서 쿼리문을 비정상으로 종료시키는 값에 대응할 수 없음 -->
 	
-	<update id="updateMember" parameterType="com.exam.member.MemberVO">
+	<update id="updateMember" parameterType="com.exam.exSpring.member.MemberVO">
 		update MEMBER_TABLE set MEM_NAME=#{memName}, MEM_POINT=#{memPoint} where MEM_ID=#{memId}
 	</update>
 		 

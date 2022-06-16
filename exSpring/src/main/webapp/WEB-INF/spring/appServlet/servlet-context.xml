@@ -3,7 +3,9 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
@@ -33,7 +35,7 @@
 	<!-- 데이터베이스 연결을 관리하는 커넥션풀로서 DBCP를 등록 -->
 	<!-- DB연결을 위한 정보 입력 -->
 	<beans:bean id="BasicDataSource" class="org.apache.commons.dbcp2.BasicDataSource">
-		<beans:property name="driverClassName" value=""/>
+		<beans:property name="driverClassName" value="oracle.jdbc.OracleDriver"/>
 		<beans:property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"></beans:property>
 		<beans:property name="username" value="web"></beans:property>
 		<beans:property name="password" value="web1234"></beans:property>
@@ -46,7 +48,20 @@
   		<!-- 설정파일 위치 -->
   		<beans:property name="configLocation" value="classpath:mybatis/mybatis-config.xml" />
 	</beans:bean>
+
 	<!--classpath:== /exSpring/src/main/resources-->
 	<!-- Namespaces에서 설정이 되어있지 않아서 bean태그를 그대로 사용하면 오류발생 -> beans:bean태그 사용 -->
+	<!-- ref 속성은 스프링 컨테이너에 생성되어 있는 변수를 불러오는 속성 -->
+	
+	<!-- SqlSessionTemplate : SqlSession구현체로서, 스레드에 안전하고, 스프링트랜잭션에 따라서 커밋,롤백을 수행하고,
+							  마이바티스 예외를 스프링 예외로 변환 -->
+	<!-- <beans:bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate"> -->
+		<!-- 생성자의 첫번째 인자로 sqlSessionFactory라는 이름으로 스프링에 등록된 객체를 전달 -->
+		<!-- <beans:constructor-arg index="0" ref="sqlSessionFactory" />
+	</beans:bean> -->
+	
+<!-- com.exam.exSpring.member패키지 아래에 존재하는 인터페이스 중 마이바티스를 실행하는 인터페이스의 구현제를 자동생성하여 스프링에 등록  -->
+<!-- annotation="org.apache.ibatis.annotations.Mapper"를 추가해서 해당 어노테이션이 붙은 인터페이스의 구현체를 생성함 -->
+	<mybatis-spring:scan base-package="com.exam.exSpring.member" annotation="org.apache.ibatis.annotations.Mapper"/>
 	
 </beans:beans>

@@ -1,4 +1,4 @@
-package com.exam.member;
+package com.exam.exSpring.member;
 
 import java.io.IOException;
 import java.io.PrintWriter;

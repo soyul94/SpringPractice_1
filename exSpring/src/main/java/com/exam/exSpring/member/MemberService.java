@@ -1,9 +1,8 @@
-package com.exam.member;
+package com.exam.exSpring.member;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public interface MemberDao {
+public interface MemberService {
 
 	//DB 테이블을 담은 list를 출력		
 	List<MemberVO> selectMemberList(); //ArrayList가 아니라 List라는 인터페이스를 사용
