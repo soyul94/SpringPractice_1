@@ -2,6 +2,8 @@ package com.exam.exSpring.member;
 
 import java.util.List;
 
+//Service인터페이스와 Mapper인터페이스는 거의 유사함
+
 public interface MemberService {
 
 	//DB 테이블을 담은 list를 출력		

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.exam.exSpring.bbs.BbsDao">
+
+	<resultMap type="com.exam.exSpring.bbs.BbsVO" id="BbsVO">
+		<id property="bbsNo" column="BBS_NO" />
+		<result property="bbsTitle" column="BBS_TITLE" />
+		<result property="bbsContent" column="BBS_CONTENT" />
+		<result property="bbsWriter" column="BBS_WRITER" />
+		<result property="bbsRegDate" column="BBS_REG_DATE" />
+		<result property="bbsCount" column="BBS_COUNT" />
+	</resultMap>
+	
+	<select id="selectBbsList" resultMap="BbsVO">
+		SELECT BBS_NO, BBS_TITLE, BBS_CONTENT, BBS_WRITER, BBS_REG_DATE, BBS_COUNT FROM BBS
+	</select>
+	
+	<select id="selectBbs" resultType="BbsVO" parameterType="string">
+		SELECT BBS_NO, BBS_TITLE, BBS_CONTENT, BBS_WRITER, BBS_REG_DATE, BBS_COUNT FROM BBS
+		WHERE BBS_NO=#{bbsNo}
+	</select>
+	
+	<insert id="insertBbs" parameterType="com.exam.exSpring.bbs.BbsVO">
+		INSERT INTO BBS (BBS_NO, BBS_TITLE, BBS_CONTENT, BBS_WRITER, BBS_REG_DATE)
+		VALUES (BBS_SEQ.NEXTVAL,#{bbsTitle},#{bbsContent},#{bbsWriter},SYSDATE)
+	</insert>
+	
+	<update id="updateBbs" parameterType="com.exam.exSpring.bbs.BbsVO">
+		UPDATE BBS SET BBS_TITLE=#{bbsTitle}, BBS_CONTENT=#{bbsContent} WHERE BBS_NO=#{bbsNo}
+	</update>
+	
+	<delete id="deleteBbs" parameterType="string">
+		DELETE FROM BBS WHERE BBS_NO=#{bbsNo}
+	</delete>
+  
+</mapper>

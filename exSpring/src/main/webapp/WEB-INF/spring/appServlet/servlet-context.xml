@@ -63,5 +63,6 @@
 <!-- com.exam.exSpring.member패키지 아래에 존재하는 인터페이스 중 마이바티스를 실행하는 인터페이스의 구현제를 자동생성하여 스프링에 등록  -->
 <!-- annotation="org.apache.ibatis.annotations.Mapper"를 추가해서 해당 어노테이션이 붙은 인터페이스의 구현체를 생성함 -->
 	<mybatis-spring:scan base-package="com.exam.exSpring.member" annotation="org.apache.ibatis.annotations.Mapper"/>
+	<mybatis-spring:scan base-package="com.exam.exSpring.bbs" annotation="org.apache.ibatis.annotations.Mapper"/>
 	
 </beans:beans>

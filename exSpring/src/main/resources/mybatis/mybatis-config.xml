@@ -13,6 +13,7 @@
 	<!-- 마이바티스 설정파일에서 사용하기 쉽게 미리 alias하는 것 -->
 	<typeAliases>
 		<typeAlias alias="MemberVO" type="com.exam.exSpring.member.MemberVO"/>
+		<typeAlias alias="BbsVO" type="com.exam.exSpring.bbs.BbsVO"/>
 		<!-- <typeAlias alias="StudentVO" type="com.exam.student.StudentVO"/> -->
 	</typeAliases>
 
@@ -31,6 +32,7 @@
   
   <mappers> <!-- 마이바티스를 통해서 실행할 SQL문들을 정의해놓은 XML파일들 -->
     <mapper resource="mybatis/MemberMapper.xml"/>
+    <mapper resource="mybatis/BbsMapper.xml"/>
     <!-- <mapper resource="mybatis/StudentMapper.xml"/> -->
   </mappers><!-- 이 마이바티스 설정파일은 프로젝트에 하나만 있다. 테이블이 추가되면 여기에 맵퍼 지정만 추가해주면 되는 것.ㅣ  -->
   
