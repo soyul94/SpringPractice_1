@@ -25,18 +25,18 @@
 	</c:choose>
 	
 	<form action="${formUrl}" method="post">
-		<table>
+		<table class="table table-bordered">
 			<tr>
 				<th>제목</th>
 				<td>
-					<input type="text" name="bbsTitle" value="<c:out value="${user.bbsTitle}"/>" />
+					<input type="text" name="bbsTitle" value="<c:out value="${user.bbsTitle}"/>" style="width:395px;"/>
 				</td>	
 			</tr>
 			<c:if test="${menu eq 'add'}">
 				<tr>
 					<th>작성자</th>
 					<td>
-						<input type="text" name="bbsWriter" value="<c:out value="${user.bbsWriter}"/>" />
+						<input type="text" name="bbsWriter" value="<c:out value="${user.bbsWriter}"/>" style="width:395px;" />
 					</td>
 				</tr>
 			</c:if>

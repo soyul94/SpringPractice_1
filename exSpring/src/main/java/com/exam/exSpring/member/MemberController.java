@@ -1,8 +1,17 @@
 package com.exam.exSpring.member;
 
 
+import java.io.IOException;
+import java.net.Authenticator.RequestorType;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -46,7 +55,6 @@ public class MemberController  { //extends HttpServlet를 해줄 필요가 없�
 		return "member/memAddForm";
 	}
 	
-	
 	@RequestMapping(value="/member/add.do", method=RequestMethod.POST)   
 	public String memberAddPost(MemberVO vo) {
 		System.out.println("memberAddPost 실행 ! ");		
@@ -57,6 +65,8 @@ public class MemberController  { //extends HttpServlet를 해줄 필요가 없�
 		return "redirect:/member/list.do"; 
 		//뷰 이름에 redirect: 접두어를 사용하여 (포워드가 아닌 리다이레트임을 표시함)
 	}
+	
+	
 	
 	@RequestMapping(value="/member/edit.do", method=RequestMethod.GET)   
 	public String memberEditGet(String memId, Model model) {
@@ -99,6 +109,8 @@ public class MemberController  { //extends HttpServlet를 해줄 필요가 없�
 		return "redirect:/member/list.do";
 	}
 	
+	
+	
 	@RequestMapping(value="/member/delete.do", method=RequestMethod.GET)   
 	public String memberDeleteGet(MemberVO vo) {
 		System.out.println("memberDeleteGet 실행 ! ");		
@@ -110,5 +122,44 @@ public class MemberController  { //extends HttpServlet를 해줄 필요가 없�
 		return "redirect:/member/list.do";
 	}
 	
+	
+	
+	@RequestMapping(value="/member/login.do", method = RequestMethod.GET) 
+	public String memberLoginGet() {
+		System.out.println("memberLoginGet 실행 ! ");		
+		return "member/memberLogin";
+	}
+	
+	@RequestMapping(value="/member/login.do", method = RequestMethod.POST)  
+	public String memberLoginPost(MemberVO user, HttpSession session, Model model){
+		System.out.println("memberLoginPost 실행 ! ");		
+		
+		MemberVO result = memberService.selectLoginMember(user);
+		
+		if(result==null) {//로그인 실패한 경우 : 다시 로그인 폼으로 이동함.
+			return "redirect:/member/login.do"; //get으로 요청함
+		}else {//로그인 성공한 경우
+			//스프링은 HttpSession개체를 지원해준다. 인자로 받기만 하면 됌.
+			session.setAttribute("loginUser", result);	// 로그인 성공한 사용자 정보를 세션에 'loginUser'라는 이름으로 저장
+			
+			return "redirect:/member/list.do";
+		}
+	}
+		
+	@RequestMapping(value="/member/logout.do", method = RequestMethod.GET)
+	public String memberLogoutGet(HttpSession session) {
+		System.out.println("memberLogoutGet 실행 ! ");
+		
+		// session의 속성값을 삭제하는 방법
+		//1. 속성값에 null을 set함
+		session.setAttribute("loginUser", null); 
+		//2. 속성 자체를 remove메소드를 이용하여 지워버림
+		session.removeAttribute("loginUser");
+		//3. 세션객체 전체를 초기화(삭제 후 재생성)
+		session.invalidate(); 
+		//현재 생성한 세션객체를 유요하지 않다고 선언해주는 것. 그래서 톰캣이 유요하지 않는 것을 지우고 새로 만틈
+		
+		return "redirect:/member/list.do";
+	}
 
 }

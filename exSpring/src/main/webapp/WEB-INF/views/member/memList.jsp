@@ -13,7 +13,7 @@
 
 	<%--<%@ include file="" %> : 현재 jsp파일에 include한 파일의 소스를 아예 붙임--%>
 	<%--<c:import url=""></c:import> : 결과만 현재 jsp파일에 붙여줌. 외부 사이트에서도 결과 가져올 수 있음. --%>
-	<jsp:include page="/WEB-INF/views/member/memberMenu.jsp" /> <%-- 결과만 현재 jsp파일에 붙여줌. 이 사이에도 param태그 사용 가능--%>
+	<jsp:include page="/WEB-INF/views/comm/Menu.jsp" /> <%-- 결과만 현재 jsp파일에 붙여줌. 이 사이에도 param태그 사용 가능--%>
 	<%--일일히 jsp파일마다 추가하는 방법 외에도 
 		web.xml에 공통부분을 정의할 수도 있고 설정파일을 만들어서 공통부분을 추가하도록 하는 것을 도와주는 Tiles와 SiteMesh등이 있다. --%>
 

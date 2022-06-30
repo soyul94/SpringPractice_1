@@ -10,7 +10,7 @@
 </head>
 <body>
 
-<jsp:include page="/WEB-INF/views/member/memberMenu.jsp" />
+<jsp:include page="/WEB-INF/views/comm/Menu.jsp" />
 
 <h2>MEMBER_TABLE</h2>
 <p>DB에 인스턴스 추가하기</p>	

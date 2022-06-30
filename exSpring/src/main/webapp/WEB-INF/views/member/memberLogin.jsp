@@ -10,14 +10,14 @@
 </head>
 <body>
 
-<jsp:include page="/WEB-INF/views/member/memberMenu.jsp" />
+<jsp:include page="/WEB-INF/views/comm/Menu.jsp" />
 
 <h2>MEMBER_TABLE</h2>
 <p>로그인 하기</p>	
 
 <form action="${pageContext.request.contextPath}/member/login.do" method="post">
-ID&emsp;&emsp;&emsp;&emsp;&emsp;: <input type = "text" name="userId"/><br>
-PASSWORD&emsp;: <input type="password" name="userPW"/><br>
+ID&emsp;&emsp;&emsp;&emsp;&emsp;: <input type = "text" name="memId"/><br>
+PASSWORD&emsp;: <input type="password" name="memPW"/><br>
 
 <input type="submit" value="로그인"/>
 </form>

@@ -4,6 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.exam.exSpring.bbs.BbsDao">
+<!-- 이 namespace로 스프링컨테이너가 DaoImpl을 자동으로 만들 수 있는 건가 ? -->
 
 	<resultMap type="com.exam.exSpring.bbs.BbsVO" id="BbsVO">
 		<id property="bbsNo" column="BBS_NO" />

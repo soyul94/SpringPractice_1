@@ -31,6 +31,19 @@
 		 적용된 클래스들의 객체를 생성하여 스프링(객체컨테이너)에 자동 등록 -->
 	<context:component-scan base-package="com.exam.exSpring" />
 	
+	<interceptors>
+		<interceptor>
+			<!-- 인터셉터를 실행할 경로에 인터셉터를 매핑함 -->
+			<!-- <mapping path="/**"/> :  모든 경로에서 실행-->
+			<mapping path="/**"/>
+			<!-- 인터셉터를 실행시키지 않을 경로로 지정 -->
+			<exclude-mapping path="/member/login.do"/>
+			<exclude-mapping path="/member/add.do"/>
+			<!-- 어떤 인터셉터를 실행할지 지정 -->
+			<beans:bean class="com.exam.exSpring.member.LoginInterceptor" />
+		</interceptor>
+	</interceptors>
+	
 	
 	<!-- 데이터베이스 연결을 관리하는 커넥션풀로서 DBCP를 등록 -->
 	<!-- DB연결을 위한 정보 입력 -->
@@ -64,5 +77,8 @@
 <!-- annotation="org.apache.ibatis.annotations.Mapper"를 추가해서 해당 어노테이션이 붙은 인터페이스의 구현체를 생성함 -->
 	<mybatis-spring:scan base-package="com.exam.exSpring.member" annotation="org.apache.ibatis.annotations.Mapper"/>
 	<mybatis-spring:scan base-package="com.exam.exSpring.bbs" annotation="org.apache.ibatis.annotations.Mapper"/>
+	<!-- <mybatis-spring:scan base-package="com.exam.exSpring" annotation="org.apache.ibatis.annotations.Mapper"/> 
+		 이렇게 폴더 전체를 잡아줘도 무방함.
+	-->
 	
 </beans:beans>

@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html>
 <head>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <meta charset="UTF-8">
 <title>게시글 상세 페이지</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <script src="http://code.jquery.com/jquery-latest.min.js"></script> <!-- url주소에서 가장 최신의 제이쿼리를 불러옴 -->
 </head>
 <body>
@@ -14,23 +15,23 @@
 	<p>BbsController의 bbsDetail메소드 실행.</p>
 	
 	<button onclick="location.href='<c:url value="/bbs/list.do"/>'">목록가기</button>
-	<table>
+	<table class="table table-bordered"> 
 		<tr>
-			<th>번호</th>
+			<th class="table-primary">번호</th>
 			<td><c:out value="${vo.bbsNo}"/></td>
-			<th>작성자</th>
+			<th class="table-primary">작성자</th>
 			<td><c:out value="${vo.bbsWriter}"/></td>
-			<th>작성일</th>
-			<td><c:out value="${vo.bbsRegDate}"/></td>
-			<th>조회수</th>
+			<th class="table-primary">작성일</th>
+			<td><fmt:formatDate value="${vo.bbsRegDate}" pattern="yyyy-MM-dd"/></td>
+			<th class="table-primary">조회수</th>
 			<td><c:out value="${vo.bbsCount}"/></td>
 		</tr>
 		<tr>
-			<th colspan="2">제목</th>
+			<th class="table-primary" colspan="2">제목</th>
 			<td colspan="6"><c:out value="${vo.bbsTitle}"/></td>
 		</tr>
 		<tr>
-			<th colspan="2">내용</th>
+			<th class="table-primary" colspan="2">내용</th>
 			<td colspan="6"><c:out value="${vo.bbsContent}"/></td>
 		</tr>
 	</table>

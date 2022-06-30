@@ -13,7 +13,7 @@ public class MemberDaoMybatis implements MemberDao{
 	
 //	@Autowired //스프링이 자동으로 얘랑 매칭해줌
 //	private SqlSessionFactory sqlSessionFactory; 
-	@Autowired
+	//@Autowired
 	private SqlSession session;
 	
 	@Override

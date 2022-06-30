@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,6 +22,7 @@ Plain Old Java Object : 평범하고 옛날부터 쓰는 자바 오브젝트로 
 */
 
 @Controller
+@RequestMapping("/bbs/") //해당 컨트롤러의 핸들러에서 공통적으로 쓰이는 요청주소를 지정해줌
 public class BbsController  { //extends HttpServlet를 해줄 필요가 없음
 	
 	//왜 여기서는 전자정부랑 다르게 @resource 사용이 불가하지 ???
@@ -28,7 +30,16 @@ public class BbsController  { //extends HttpServlet를 해줄 필요가 없음
 	@Named("bbsServiceImpl")
 	private BbsService bbsService;
 	
-	@RequestMapping(value = "/bbs/list.do")
+/*	
+	Spring 4.3버전 부터 추가된 메소드 -> HttpMethod 방식에 맞게 어노테이션으로 매핑 가능해짐
+	@RequestMapping(value="요청주소", method=RequestMethod.GET) == @GetMapping(value = "요청주소")
+	@RequestMapping(value="요청주소", method=RequestMethod.POST) == @PostMapping(value = "요청주소")
+	
+	get과 post 외에도 Put, Delete, Patch 등도 가능하다.
+	(@PutMapping, @DeleteMapping, PatchMapping)
+	
+*/	
+	@RequestMapping(value = "list.do")	//@GetMapping(value = "요청주소") //스프링 4.3 이후로 사용할 수 있음. value생략 가능
 	public String bbsList(Model model) {
 		System.out.println("bbsList 실행");
 		
@@ -41,7 +52,7 @@ public class BbsController  { //extends HttpServlet를 해줄 필요가 없음
 		return "bbs/bbsList";
 	}
 	
-	@RequestMapping(value="/bbs/detail.do")
+	@RequestMapping(value="detail.do")
 	public String bbsDetail(String bbsNo, Model model ) {
 		System.out.println("bbsDetail 실행");
 		
@@ -52,7 +63,9 @@ public class BbsController  { //extends HttpServlet를 해줄 필요가 없음
 		return "bbs/bbsDetail";
 	}
 	
-	@RequestMapping(value = "/bbs/form.do")
+	
+	//이렇게 기능이 집중되는 것은 좋지 못함. 
+	@RequestMapping(value = "form.do")
 	public String bbsForm(String menu, BbsVO vo, Model model) {
 		System.out.println("bbsForm 실행");
 		System.out.println(vo.getBbsNo());
@@ -72,7 +85,7 @@ public class BbsController  { //extends HttpServlet를 해줄 필요가 없음
 		return "bbs/bbsForm";
 	}
 	
-	@RequestMapping(value="/bbs/add.do")
+	@RequestMapping(value="add.do")
 	public String bbsAdd(String menu, BbsVO vo, Model model) {
 		System.out.println("bbsAdd 실행");
 		
@@ -86,7 +99,7 @@ public class BbsController  { //extends HttpServlet를 해줄 필요가 없음
 		return "redirect:/bbs/list.do";
 	}
 	
-	@RequestMapping(value="/bbs/edit.do")
+	@RequestMapping(value="edit.do")
 	public String bbsEdit(String menu, BbsVO vo, Model model) {
 		System.out.println("bbsEdit 실행");
 		
@@ -98,7 +111,7 @@ public class BbsController  { //extends HttpServlet를 해줄 필요가 없음
 		return "redirect:/bbs/list.do";
 	}
 	
-	@RequestMapping(value="/bbs/delete.do")
+	@RequestMapping(value="delete.do")
 	public String bbsDelete(String bbsNo, Model model) {
 		System.out.println("bbsDelete 실행");
 		

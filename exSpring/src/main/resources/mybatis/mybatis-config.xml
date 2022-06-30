@@ -15,6 +15,7 @@
 		<typeAlias alias="MemberVO" type="com.exam.exSpring.member.MemberVO"/>
 		<typeAlias alias="BbsVO" type="com.exam.exSpring.bbs.BbsVO"/>
 		<!-- <typeAlias alias="StudentVO" type="com.exam.student.StudentVO"/> -->
+		<!-- 마이바티스 내부에서는 typeAlias의 대소문자를 구별하지 않는다. 단지 사용자의 눈을 위해서 낙타표기법을 쓰는 것 -->
 	</typeAliases>
 
 <!-- 스프링 설정파일에 이미 저장된 데이터므로 상관없음 -->	
