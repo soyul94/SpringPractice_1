@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.inject.Named;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -14,6 +15,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttribute;
+
+import com.exam.exSpring.member.MemberVO;
 
 /*
 - 스프링의 철학 
@@ -66,20 +70,28 @@ public class BbsController  { //extends HttpServlet를 해줄 필요가 없음
 	
 	//이렇게 기능이 집중되는 것은 좋지 못함. 
 	@RequestMapping(value = "form.do")
-	public String bbsForm(String menu, BbsVO vo, Model model) {
+	public String bbsForm(String menu, BbsVO vo, @SessionAttribute("loginUser") MemberVO user, HttpSession session, Model model) {
 		System.out.println("bbsForm 실행");
 		System.out.println(vo.getBbsNo());
 		System.out.println(menu);
 		
+//		로그인 정보를 세션에서 꺼내옴
+//		MemberVO user = (MemberVO)session.getAttribute("loginUser"); == @SessionAttribute("loginUser") MemberVO
+//		@SessionAttribute 이 어노테이션은 4.3 이후에 등장한 것으로 사용에 주의 해야한다
+		
+		if(user!=null && user.getMemId()!=null && user.getMemId()!="")
+		vo.setBbsWriter(user.getMemId());
+		model.addAttribute("user",user);
+		
 		if(menu.equals("edit")) {
-			BbsVO user = bbsService.selectBbs(Integer.toString(vo.getBbsNo()));	
-			System.out.println(user.getBbsContent());
-			model.addAttribute("user",user);
+			BbsVO bbsUser = bbsService.selectBbs(Integer.toString(vo.getBbsNo()));	
+			System.out.println(bbsUser.getBbsContent());
+			model.addAttribute("bbsUser",bbsUser);
 		}
 //		else if(menu.equals("edit")) {
 //			vo.
 //		}
-		
+//		
 		model.addAttribute("menu",menu);
 		
 		return "bbs/bbsForm";

@@ -77,6 +77,7 @@
 <!-- annotation="org.apache.ibatis.annotations.Mapper"를 추가해서 해당 어노테이션이 붙은 인터페이스의 구현체를 생성함 -->
 	<mybatis-spring:scan base-package="com.exam.exSpring.member" annotation="org.apache.ibatis.annotations.Mapper"/>
 	<mybatis-spring:scan base-package="com.exam.exSpring.bbs" annotation="org.apache.ibatis.annotations.Mapper"/>
+	<mybatis-spring:scan base-package="com.exam.exSpring.reply" annotation="org.apache.ibatis.annotations.Mapper"/>
 	<!-- <mybatis-spring:scan base-package="com.exam.exSpring" annotation="org.apache.ibatis.annotations.Mapper"/> 
 		 이렇게 폴더 전체를 잡아줘도 무방함.
 	-->

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.exam.exSpring.reply.ReplyDAO">
+
+	<resultMap type="com.exam.exSpring.reply.ReplyDAO" id="replyVo">
+		
+	</resultMap>
+	<select id="selectListReply" resultType="ReplyVO">
+		select rep_no, rep_bbs_no, rep_writer, rep_reg_date, rep_content from reply where rep_bbs_no=#{repBbsNo}
+	</select>
+	
+	<insert id="insertReply" parameterType="ReplyVO"  >
+		insert into reply(rep_no, rep_bbs_no, rep_writer, rep_reg_date, rep_content)
+			values(rep_seq.nextval, #{repBbsNo}, #{repWriter}, SYSDATE, #{repContent})
+	</insert>
+</mapper>	  
+

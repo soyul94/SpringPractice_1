@@ -16,7 +16,11 @@
 	</c:if>
 	
 	<c:if test="${sessionScope.loginUser ne null }"> 
-		<c:out value=" ${sessionScope.loginUser.memName}님 안녕하세요 "/> || 
+		<c:out value=" ${sessionScope.loginUser.memName}님 "/> ||  
+		
+		<a href="${pageContext.request.contextPath}/member/list.do" >회원관리</a> ||
+		<a href="${pageContext.request.contextPath}/bbs/list.do" >게시판</a> ||
+
 		<a href="${pageContext.request.contextPath}/member/logout.do" >로그아웃</a> 
 	</c:if>
 	<hr>

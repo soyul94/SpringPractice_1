@@ -19,7 +19,7 @@
 		</c:when>
 		<c:when test="${menu eq 'edit'}">
 			<c:url var="formUrl" value="/bbs/edit.do">
-				<c:param name="bbsNo" value="${user.bbsNo}"></c:param>
+				<c:param name="bbsNo" value="${bbsUser.bbsNo}"></c:param>
 			</c:url>
 		</c:when>
 	</c:choose>
@@ -29,22 +29,22 @@
 			<tr>
 				<th>제목</th>
 				<td>
-					<input type="text" name="bbsTitle" value="<c:out value="${user.bbsTitle}"/>" style="width:395px;"/>
+					<input type="text" name="bbsTitle" value="<c:out value="${bbsUser.bbsTitle}"/>" style="width:395px;"/>
 				</td>	
 			</tr>
 			<c:if test="${menu eq 'add'}">
 				<tr>
 					<th>작성자</th>
 					<td>
-						<input type="text" name="bbsWriter" value="<c:out value="${user.bbsWriter}"/>" style="width:395px;" />
+						<input type="text" name="bbsWriter" value="<c:out value="${user.memId}"/>" readonly="readonly" style="width:395px;" />
 					</td>
 				</tr>
-			</c:if>
+			</c:if> 
 			<tr>
 				<th>내용</th>
 				<td>
 					<%-- <input type="text" name="bbsContent" value="<c:out value="${vo.bbsContent}"/>" /> --%>
-					<textarea name="bbsContent" rows="15" cols="50" style="resize: none;"><c:out value="${user.bbsContent}"/></textarea>
+					<textarea name="bbsContent" rows="15" cols="50" style="resize: none;"><c:out value="${bbsUser.bbsContent}"/></textarea>
 				</td>
 			</tr>
 		</table>
