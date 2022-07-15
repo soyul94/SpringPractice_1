@@ -184,6 +184,7 @@
 			<version>1.2</version>
 		</dependency>
 		
+		<!--json을 사용하기 위해 추가한 라이브러리-->
 		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
 		<dependency>
 		    <groupId>com.fasterxml.jackson.core</groupId>

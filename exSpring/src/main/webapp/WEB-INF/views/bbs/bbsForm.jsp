@@ -9,6 +9,9 @@
 <title>게시글 form</title>
 </head>
 <body>
+
+<jsp:include page="/WEB-INF/views/comm/Menu.jsp" />
+
 <h1>게시글 상세</h1>
 	<p>BbsController의 bbsForm메소드 실행.</p>
 	<button onclick="location.href='<c:url value="/bbs/list.do"/>'">목록가기</button>

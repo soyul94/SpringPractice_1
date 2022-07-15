@@ -44,10 +44,10 @@ public class BbsController  { //extends HttpServlet를 해줄 필요가 없음
 	
 */	
 	@RequestMapping(value = "list.do")	//@GetMapping(value = "요청주소") //스프링 4.3 이후로 사용할 수 있음. value생략 가능
-	public String bbsList(Model model) {
+	public String bbsList(SearchInfo searchInfo, Model model) {
 		System.out.println("bbsList 실행");
 		
-		List<BbsVO> vo= bbsService.selectBbsList();
+		List<BbsVO> vo= bbsService.selectBbsList(searchInfo);
 		
 		//System.out.println("sql 수행 완료");
 		

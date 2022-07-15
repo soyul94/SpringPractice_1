@@ -6,7 +6,7 @@ public interface BbsService {
 
 	BbsVO selectBbs(String bbsNo);
 
-	List<BbsVO> selectBbsList(); //ArrayList가 아니라 List라는 인터페이스를 사용
+	List<BbsVO> selectBbsList(SearchInfo searchInfo); //ArrayList가 아니라 List라는 인터페이스를 사용
 
 	int insertBbs(BbsVO bbs);
 

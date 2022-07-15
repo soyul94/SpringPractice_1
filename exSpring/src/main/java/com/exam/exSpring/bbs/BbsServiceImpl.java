@@ -17,8 +17,8 @@ public class BbsServiceImpl implements BbsService{
 	}
 
 	@Override
-	public List<BbsVO> selectBbsList() {
-		return bbsDao.selectBbsList();
+	public List<BbsVO> selectBbsList(SearchInfo searchInfo) {
+		return bbsDao.selectBbsList(searchInfo);
 	}
 
 	@Override

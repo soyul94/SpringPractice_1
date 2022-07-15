@@ -13,9 +13,35 @@
 <script src="http://code.jquery.com/jquery-latest.min.js"></script> <!-- url주소에서 가장 최신의 제이쿼리를 불러옴 -->
 </head>
 <body>
+
+<jsp:include page="/WEB-INF/views/comm/Menu.jsp" />
+
 	<h1>게시판</h1>
 	<p>BbsController의 bbsList메소드 실행.</p>
 	
+	<%-- 검색창 만들기 --%>
+	<form action="<c:url value="/bbs/list.do"/>">
+		<select name="searchType">
+			<%-- <option value="title" ${searchInfo.searchType=='title' ? 'selected':''}>제목</option> 
+			<option value="content" <c:if test="${searchInfo.searchType == 'content'}">selected</c:if>>내용</option>
+			<option value="total" <c:if test="${searchInfo.searchType == 'total'}">selected</c:if>>제목+내용</option> --%>
+			<option value="title" >제목</option> 
+			<option value="content" >내용</option>
+			<option value="total" >제목+내용</option>
+		</select>
+		<script type="text/javascript">
+			//자바스크립트에서 빈문자열은 false이다.
+			if('${searchInfo.searchType}'){ //if('${searchInfo.searchType}'!='')
+				$('[name="searchType"]').val('${searchInfo.searchType}');
+			}
+		</script>
+		
+		<input type="text" name="searchWord" placeholder="검색어를 입력하세요" value="${searchInfo.searchWord}" />
+		<input type="submit" value="검색" /><%--value="${param.searchWord}"  --%>
+	</form>
+	<br>
+
+
 	<table class="table table-hover ">
 		<thead class="table-group-divider">
 		<tr class="table-primary">

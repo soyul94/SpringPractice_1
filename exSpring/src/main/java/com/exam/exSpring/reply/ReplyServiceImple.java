@@ -17,8 +17,13 @@ public class ReplyServiceImple implements ReplyService {
 	}
 
 	@Override
-	public List<ReplyVO> selectListReply(ReplyVO replyVo) {
-		return replyDao.selectListReply(replyVo);
+	public List<ReplyVO> selectListReply(int repBbsNo) {
+		return replyDao.selectListReply(repBbsNo);
+	}
+
+	@Override
+	public int deleteReply(ReplyVO replyVo) {
+		return replyDao.deleteReply(replyVo);
 	}
 
 }

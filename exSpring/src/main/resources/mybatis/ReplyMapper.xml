@@ -8,13 +8,19 @@
 	<resultMap type="com.exam.exSpring.reply.ReplyDAO" id="replyVo">
 		
 	</resultMap>
-	<select id="selectListReply" resultType="ReplyVO">
-		select rep_no, rep_bbs_no, rep_writer, rep_reg_date, rep_content from reply where rep_bbs_no=#{repBbsNo}
+	<select id="selectListReply" parameterType="int" resultType="ReplyVO">
+		select rep_no, rep_bbs_no, rep_writer, rep_reg_date, rep_content from reply 
+		where rep_bbs_no=#{repBbsNo}
+		order by rep_reg_date desc
 	</select>
 	
 	<insert id="insertReply" parameterType="ReplyVO"  >
 		insert into reply(rep_no, rep_bbs_no, rep_writer, rep_reg_date, rep_content)
 			values(rep_seq.nextval, #{repBbsNo}, #{repWriter}, SYSDATE, #{repContent})
 	</insert>
+	
+	<delete id="deleteReply" parameterType="ReplyVO">
+		DELETE FROM REPLY WHERE REP_NO=#{repNo} AND REP_WRITER=#{repWriter}
+	</delete>
 </mapper>	  
 
